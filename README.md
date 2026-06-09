@@ -22,43 +22,83 @@ In timing diagram Q0 is changing as soon as the negative edge of clock pulse is 
 
 ![image](https://github.com/naavaneetha/4-BIT-RIPPLE-COUNTER/assets/154305477/85e1958a-2fc1-49bb-9a9f-d58ccbf3663c)
 
+
 **Procedure**
 
-/* write all the steps invloved */
+1.Increment count on each positive edge of the clock. 
+
+2.Reset count to zero when it reaches 15. 
+
+3.Generate clock signal (clk). 
+
+4.Instantiate the RippleCounter module. 
+
+5.Conduct functional testing by displaying the count at each clock cycle for 16 cycles.
 
 **PROGRAM**
-```
-module EXP12DE(clk, rst, count);
-input wire clk;
-input wire rst;
-output reg [3:0] count;
 
-always @(posedge clk or posedge rst)
-begin
-	if(rst)
-		count <= 4'b0000;
-	else
-		count <= count + 1;
-end
-endmodule
-```
-
-```
 /* Program for 4 Bit Ripple Counter and verify its truth table in quartus using Verilog programming.
 
-Developed by: SAAGAR S
-RegisterNumber: 212225040351
-*/
+ Developed by: SAAGAR S
+ RegisterNumber:212225040351
+ */
+ ```
+module bitripple(
+    input  wire clk,      
+    input  wire reset_n,  
+    output reg  [3:0] q   
+);
+
+
+    always @(negedge clk or negedge reset_n) begin
+        if (!reset_n)
+            q[0] <= 1'b0;
+        else
+            q[0] <= ~q[0];
+    end
+
+
+    always @(negedge q[0] or negedge reset_n) begin
+        if (!reset_n)
+            q[1] <= 1'b0;
+        else
+            q[1] <= ~q[1];
+    end
+
+
+    always @(negedge q[1] or negedge reset_n) begin
+        if (!reset_n)
+            q[2] <= 1'b0;
+        else
+            q[2] <= ~q[2];
+    end
+
+
+    always @(negedge q[2] or negedge reset_n) begin
+        if (!reset_n)
+            q[3] <= 1'b0;
+        else
+            q[3] <= ~q[3];
+    end
+
+endmodule
 ```
+*/
 
 **RTL LOGIC FOR 4 Bit Ripple Counter**
 
-<img width="788" height="335" alt="502191311-4c8096d8-cad9-4d41-9cbd-e1ede8113038" src="https://github.com/user-attachments/assets/d05b8222-fa42-40ca-a722-a0eef59dc2f8" />
+![WhatsApp Image 2026-03-10 at 9 18 49 PM](https://github.com/user-attachments/assets/7d100cdf-f5b2-430d-a6c7-3f2470ebc9f2)
 
 **TIMING DIGRAMS FOR 4 Bit Ripple Counter**
 
-<img width="1468" height="766" alt="502192025-78996514-67e4-4300-aa0c-256ab03eb551" src="https://github.com/user-attachments/assets/42ab43f1-df41-4eb9-93e6-461e89f5b832" />
+![WhatsApp Image 2026-03-10 at 9 21 01 PM](https://github.com/user-attachments/assets/0e203d2c-a254-451c-adcc-6f1678e7f8e2)
 
 **RESULTS**
+Thus the program executed succesfully
 
- Thus implementing 4 Bit Ripple Counter using Verilog and validating their functionality using their functional tables is done successfully.
+
+
+
+
+
+
